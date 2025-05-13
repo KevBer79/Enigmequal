@@ -77,3 +77,9 @@ function verifierReponse(e) {
 }
 
 window.onload = afficherQuestion;
+
+
+// Démarrer le décompte quand la page est chargée
+window.onload = function () {
+    startCountdown(15); // Lance le compte à rebours de 20 minutes
+};
