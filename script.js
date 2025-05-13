@@ -20,7 +20,7 @@ const questions = [
 let currentQuestionIndex = 0;
 
 function afficherQuestion() {
-  const container = document.getElementById("quiz-container");
+  const container = document.getElementById("questionnaire");
   const q = questions[currentQuestionIndex];
 
   let inputHTML = "";
@@ -62,7 +62,7 @@ function verifierReponse(e) {
     estCorrect = reponseUtilisateur[0] === q.reponse;
   }
 
-  const container = document.getElementById("quiz-container");
+  const container = document.getElementById("questionnaire");
 
   if (estCorrect) {
     currentQuestionIndex++;
