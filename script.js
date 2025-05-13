@@ -1,7 +1,7 @@
 const questions = [
   {
     question: "Quel est le nom du héros de Prison Break ?",
-    options: ["Michael Scofield", "Lincoln Burrows", "T-Bag", "Fernando Sucre"],
+    options: ["Michael Scofield", "Lincoln Burrows", "PAPA", "Fernando Sucre"],
     reponse: "Michael Scofield"
   },
   {
