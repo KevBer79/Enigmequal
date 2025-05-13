@@ -20,7 +20,7 @@ const questions = [
 let currentQuestionIndex = 0;
 
 function afficherQuestion() {
-  const container = document.getElementById("questionnaire");
+  const container = document.getElementById("question-text");
   const q = questions[currentQuestionIndex];
 
   let inputHTML = "";
