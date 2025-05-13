@@ -1,74 +1,79 @@
 const questions = [
-    {
-        question: "Le poisson a attendu 3 heures sur la ligne de production ",
-        options: ["Les bactéries se sont développées", "Ce n’est pas grave, le surgélateur va le surgeler ensuite", "Un retour en stock aurait dû être fait dès le début de la panne", "Il faut détruire toutes les matières qui ont dégelées lors de la panne"],
-        answer: ["Les bactéries se sont développées", "Un retour en stock aurait dû être fait dès le début de la panne", "Il faut détruire toutes les matières qui ont dégelées lors de la panne"]
-    },
-    {
-        question: "Qui est le frère de Michael Scofield ?",
-        options: ["T-Bag", "Sucre", "Lincoln Burrows", "Mahone"],
-        answer: "Lincoln Burrows"
-    }
+  {
+    question: "Quel est le nom du héros de Prison Break ?",
+    options: ["Michael Scofield", "Lincoln Burrows", "T-Bag", "Fernando Sucre"],
+    reponse: "Michael Scofield"
+  },
+  {
+    question: "Quels sont les éléments d’un plan d’évasion ?",
+    options: ["Un tunnel", "Une alarme", "Un complice", "Une tasse de café"],
+    reponse: ["Un tunnel", "Un complice"],
+    multiple: true
+  },
+  {
+    question: "Quelle est la spécialité de Michael ?",
+    options: ["Médecin", "Avocat", "Ingénieur en bâtiment", "Gardien de prison"],
+    reponse: "Ingénieur en bâtiment"
+  }
 ];
 
-let currentQuestion = 0;
+let currentQuestionIndex = 0;
 
 function afficherQuestion() {
-    const question = questions[currentQuestion];
-    document.getElementById("question-text").textContent = question.question;
+  const container = document.getElementById("quiz-container");
+  const q = questions[currentQuestionIndex];
 
-    const optionsContainer = document.getElementById("options-container");
-    optionsContainer.innerHTML = "";
-    question.options.forEach(option => {
-        const button = document.createElement("button");
-        button.textContent = option;
-        button.onclick = () => verifierReponse(option);
-        optionsContainer.appendChild(button);
-    });
+  let inputHTML = "";
+  const inputType = q.multiple ? "checkbox" : "radio";
+
+  q.options.forEach(option => {
+    inputHTML += `
+      <label>
+        <input type="${inputType}" name="reponse" value="${option}">
+        ${option}
+      </label><br>`;
+  });
+
+  container.innerHTML = `
+    <div class="question-box">
+      <h2>${q.question}</h2>
+      <form id="quiz-form">
+        ${inputHTML}
+        <button type="submit">Valider</button>
+      </form>
+    </div>
+  `;
+
+  document.getElementById("quiz-form").onsubmit = verifierReponse;
 }
 
-function verifierReponse(reponse) {
-    const isCorrect = reponse === questions[currentQuestion].answer;
-    if (!isCorrect) {
-        alert("Mauvaise réponse ! Réessayez...");
-        return;
-    }
+function verifierReponse(e) {
+  e.preventDefault();
+  const q = questions[currentQuestionIndex];
+  const elementsChecked = document.querySelectorAll('input[name="reponse"]:checked');
+  let reponseUtilisateur = Array.from(elementsChecked).map(el => el.value);
 
-    document.getElementById("next-button").style.display = "inline-block";
-}
+  let estCorrect = false;
 
-document.getElementById("next-button").addEventListener("click", () => {
-    currentQuestion++;
-    if (currentQuestion < questions.length) {
-        afficherQuestion();
-        document.getElementById("next-button").style.display = "none";
+  if (q.multiple) {
+    estCorrect = reponseUtilisateur.length === q.reponse.length &&
+                 reponseUtilisateur.every(val => q.reponse.includes(val));
+  } else {
+    estCorrect = reponseUtilisateur[0] === q.reponse;
+  }
+
+  const container = document.getElementById("quiz-container");
+
+  if (estCorrect) {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+      afficherQuestion();
     } else {
-        alert("Bravo, vous avez terminé le questionnaire !");
+      container.innerHTML = `<div class="question-box"><h2>Bravo ! Questionnaire terminé !</h2></div>`;
     }
-});
-
-// Compte à rebours
-function startCountdown(minutes) {
-    let timer = minutes * 60;
-    const timerElement = document.getElementById("timer");
-
-    const interval = setInterval(() => {
-        let min = Math.floor(timer / 60);
-        let sec = timer % 60;
-        timerElement.textContent = `⏳ Temps restant : ${min}:${sec < 10 ? "0" : ""}${sec} ⏳`;
-
-        if (--timer < 0) {
-            clearInterval(interval);
-            timerElement.textContent = "⏳ Temps écoulé !";
-            alert("Temps écoulé ! Mission échouée...");
-        }
-    }, 1000);
+  } else {
+    container.innerHTML += `<p style="color:red; font-weight:bold;">Mauvaise réponse, essaye encore !</p>`;
+  }
 }
 
-window.onload = () => {
-    afficherQuestion();
-    startCountdown(20);
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js');
-    }
-};
+window.onload = afficherQuestion;
