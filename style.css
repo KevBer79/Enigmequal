@@ -22,7 +22,7 @@ body {
     width: 90%;
     max-width: 450px;
     border: 3px solid #444;
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+    text-shadow: 3px 3px 10px rgba(0, 69, 255, 0.5);
 }
 
 h2 {
