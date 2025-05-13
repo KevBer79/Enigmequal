@@ -1,85 +1,118 @@
+// Questions du questionnaire
 const questions = [
-  {
-    question: "Quel est le nom du héros de Prison Break ?",
-    options: ["Michael Scofield", "Lincoln Burrows", "PAPA", "Fernando Sucre"],
-    reponse: "Michael Scofield"
-  },
-  {
-    question: "Quels sont les éléments d’un plan d’évasion ?",
-    options: ["Un tunnel", "Une alarme", "Un complice", "Une tasse de café"],
-    reponse: ["Un tunnel", "Un complice"],
-    multiple: true
-  },
-  {
-    question: "Quelle est la spécialité de Michael ?",
-    options: ["Médecin", "Avocat", "Ingénieur en bâtiment", "Gardien de prison"],
-    reponse: "Ingénieur en bâtiment"
-  }
+    {
+        question: "Quel est le code pour ouvrir la première porte ?",
+        options: ["1234", "4321", "0000", "2468"],
+        correct: ["4321"]
+    },
+    {
+        question: "Choisissez les objets utiles pour vous évader :",
+        options: ["Clé", "Carte magnétique", "Chocolat", "Télécommande"],
+        correct: ["Clé", "Carte magnétique"],
+        multiple: true
+    },
+    {
+        question: "Quel est le nom du gardien ?",
+        options: ["Martin", "Durand", "Lemoine", "Pascal"],
+        correct: ["Lemoine"]
+    }
 ];
 
 let currentQuestionIndex = 0;
 
 function afficherQuestion() {
-  const container = document.getElementById("question-text");
-  const q = questions[currentQuestionIndex];
+    const container = document.getElementById("questionnaire");
+    const questionText = document.getElementById("question-text");
+    const optionsContainer = document.getElementById("options-container");
+    const nextButton = document.getElementById("next-button");
 
-  let inputHTML = "";
-  const inputType = q.multiple ? "checkbox" : "radio";
+    const question = questions[currentQuestionIndex];
+    if (!question) return;
 
-  q.options.forEach(option => {
-    inputHTML += `
-      <label>
-        <input type="${inputType}" name="reponse" value="${option}">
-        ${option}
-      </label><br>`;
-  });
+    questionText.textContent = question.question;
+    optionsContainer.innerHTML = "";
 
-  container.innerHTML = `
-    <div class="question-box">
-      <h2>${q.question}</h2>
-      <form id="quiz-form">
-        ${inputHTML}
-        <button type="submit">Valider</button>
-      </form>
-    </div>
-  `;
+    question.options.forEach(option => {
+        const label = document.createElement("label");
+        const input = document.createElement("input");
+        input.type = question.multiple ? "checkbox" : "radio";
+        input.name = "option";
+        input.value = option;
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(" " + option));
+        optionsContainer.appendChild(label);
+        optionsContainer.appendChild(document.createElement("br"));
+    });
 
-  document.getElementById("quiz-form").onsubmit = verifierReponse;
+    nextButton.style.display = "block";
 }
 
-function verifierReponse(e) {
-  e.preventDefault();
-  const q = questions[currentQuestionIndex];
-  const elementsChecked = document.querySelectorAll('input[name="reponse"]:checked');
-  let reponseUtilisateur = Array.from(elementsChecked).map(el => el.value);
+document.getElementById("next-button").addEventListener("click", () => {
+    const inputs = document.querySelectorAll("#options-container input");
+    const selected = Array.from(inputs)
+        .filter(input => input.checked)
+        .map(input => input.value);
 
-  let estCorrect = false;
+    const question = questions[currentQuestionIndex];
+    const correct = question.correct.sort().toString();
+    const selectedStr = selected.sort().toString();
 
-  if (q.multiple) {
-    estCorrect = reponseUtilisateur.length === q.reponse.length &&
-                 reponseUtilisateur.every(val => q.reponse.includes(val));
-  } else {
-    estCorrect = reponseUtilisateur[0] === q.reponse;
-  }
+    if (correct !== selectedStr) {
+        afficherMessageErreur("Réponse incorrecte. Essayez encore !");
+        return;
+    }
 
-  const container = document.getElementById("questionnaire");
-
-  if (estCorrect) {
     currentQuestionIndex++;
     if (currentQuestionIndex < questions.length) {
-      afficherQuestion();
+        afficherQuestion();
     } else {
-      container.innerHTML = `<div class="question-box"><h2>Bravo ! Questionnaire terminé !</h2></div>`;
+        document.getElementById("questionnaire").innerHTML = "<h3>Bravo ! Vous avez terminé !</h3>";
     }
-  } else {
-    container.innerHTML += `<p style="color:red; font-weight:bold;">Mauvaise réponse, essaye encore !</p>`;
-  }
+});
+
+// Timer
+function startCountdown(durationInMinutes) {
+    const timerElement = document.getElementById("timer");
+    let timeLeft = durationInMinutes * 60;
+
+    const countdownInterval = setInterval(() => {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        const formattedTime = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+        timerElement.textContent = `⏳ Temps restant : ${formattedTime} ⏳`;
+
+        if (timeLeft <= 0) {
+            clearInterval(countdownInterval);
+            timerElement.textContent = "⏳ Temps écoulé ⏳!";
+            afficherMessageErreur("Temps écoulé. Vous n’avez pas réussi à vous évader à temps...");
+        }
+
+        timeLeft--;
+    }, 1000);
 }
 
-window.onload = afficherQuestion;
+// Message d'erreur
+function afficherMessageErreur(message) {
+    let erreurDiv = document.createElement("div");
+    erreurDiv.className = "erreur-fullscreen";
+    erreurDiv.innerHTML = `
+        <div class="erreur-content">
+            <p>${message}</p>
+            <button onclick="fermerMessageErreur()">RETOUR</button>
+        </div>
+    `;
+    document.body.appendChild(erreurDiv);
+}
 
+function fermerMessageErreur() {
+    let erreurDiv = document.querySelector(".erreur-fullscreen");
+    if (erreurDiv) {
+        erreurDiv.remove();
+    }
+}
 
-// Démarrer le décompte quand la page est chargée
+// Lancer tout au chargement
 window.onload = function () {
-    startCountdown(15); // Lance le compte à rebours de 20 minutes
+    startCountdown(20); // durée en minutes
+    afficherQuestion();
 };
