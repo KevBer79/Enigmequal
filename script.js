@@ -113,6 +113,6 @@ function fermerMessageErreur() {
 
 // Lancer tout au chargement
 window.onload = function () {
-    startCountdown(20); // durée en minutes
+    startCountdown(15); // durée en minutes
     afficherQuestion();
 };
