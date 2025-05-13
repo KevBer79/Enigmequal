@@ -1,8 +1,8 @@
 const questions = [
     {
-        question: "Quel est le nom de la prison dans Prison Break ?",
-        options: ["Fox River", "Shawshank", "Alcatraz", "Pelican Bay"],
-        answer: "Fox River"
+        question: "Le poisson a attendu 3 heures sur la ligne de production",
+        options: ["Les bactéries se sont développées", "Ce n’est pas grave, le surgélateur va le surgeler ensuite", "Un retour en stock aurait dû être fait dès le début de la panne", "Il faut détruire toutes les matières qui ont dégelées lors de la panne"],
+        answer: ["Les bactéries se sont développées", "Un retour en stock aurait dû être fait dès le début de la panne", "Il faut détruire toutes les matières qui ont dégelées lors de la panne"]
     },
     {
         question: "Qui est le frère de Michael Scofield ?",
