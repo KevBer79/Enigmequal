@@ -495,4 +495,13 @@ function retourAuxConsignes() {
     document.querySelector(".erreur-fullscreen")?.remove();
 
 }
+
+function demarrerQuestionnaire() {
+   document.getElementById("consignes-container").style.display = "none"; // Cache les consignes
+   document.getElementById("questionnaire").style.display = "block";      // Affiche le questionnaire
+   document.getElementById("timer").style.display = "block";              // Affiche le timer
+   currentQuestionIndex = 0;  // Réinitialise le questionnaire
+   afficherQuestion();        // Affiche la première question
+   startCountdown(15);        // Lance le chrono (15 minutes)
+}
  
