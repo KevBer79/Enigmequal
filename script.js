@@ -16,7 +16,7 @@ const questions = [
         question: "Le mécanicien est venu de dehors sans se laver les mains",
         options: ["Il a eu raison car la panne était urgente", "Il a eu raison car il ne touche pas la matière", "Il a eu raison puisqu’il va les salir en manipulant la machine", "Il a eu tort, même s’il ne touche pas la matière"],
         correct: ["Il a eu tort, même s’il ne touche pas la matière"]
-    }
+    },
     {
         question: "Le mécanicien a posé la plaque de la pompe est posée au sol",
         options: ["Il a eu raison car il va rincer la plaque à l’eau", "Il a eu raison pour ne pas perdre de temps", "Il aurai dû se faire aider, pour aller chercher un bac propre et poser la plaque à l’intérieur", "Il l’a posé au sol, car il pensait que la ligne sera dans tous les cas nettoyée"],
