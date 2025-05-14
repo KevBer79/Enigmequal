@@ -1,20 +1,26 @@
 // Questions du questionnaire
 const questions = [
     {
-        question: "Quel est le code pour ouvrir la première porte ?",
-        options: ["1234", "4321", "0000", "2468"],
-        correct: ["4321"]
-    },
-    {
-        question: "Choisissez les objets utiles pour vous évader :",
-        options: ["Clé", "Carte magnétique", "Chocolat", "Télécommande"],
-        correct: ["Clé", "Carte magnétique"],
+        question: "Le poisson a attendu 3 heures sur la ligne de production",
+        options: ["Les bactéries se sont développées ", "Ce n’est pas grave, le surgélateur va le surgeler ensuite", "Un retour en stock aurait dû être fait dès le début de la panne", "Il faut détruire toutes les matières qui ont dégelées lors de la panne"],
+        correct: ["Les bactéries se sont développées ", "Un retour en stock aurait dû être fait dès le début de la panne", "Il faut détruire toutes les matières qui ont dégelées lors de la panne"],
         multiple: true
     },
     {
-        question: "Quel est le nom du gardien ?",
-        options: ["Martin", "Durand", "Lemoine", "Pascal"],
-        correct: ["Lemoine"]
+        question: "La sauce a attendu 3 heures dans le bas tampon à une température estimée à 60°C",
+        options: ["Les bactéries se sont développées ", "La température reste correcte mais il faut refaire un CCP de cuisson", "La sauce a décanté mais je dose quand même ", "La sauce doit être mise en PSO"],
+        correct: ["La température reste correcte mais il faut refaire un CCP de cuisson", "La sauce doit être mise en PSO"],
+        multiple: true
+    },
+    {
+        question: "Le mécanicien est venu de dehors sans se laver les mains",
+        options: ["Il a eu raison car la panne était urgente", "Il a eu raison car il ne touche pas la matière", "Il a eu raison puisqu’il va les salir en manipulant la machine", "Il a eu tort, même s’il ne touche pas la matière"],
+        correct: ["Il a eu tort, même s’il ne touche pas la matière"]
+    }
+    {
+        question: "Le mécanicien a posé la plaque de la pompe est posée au sol",
+        options: ["Il a eu raison car il va rincer la plaque à l’eau", "Il a eu raison pour ne pas perdre de temps", "Il aurai dû se faire aider, pour aller chercher un bac propre et poser la plaque à l’intérieur", "Il l’a posé au sol, car il pensait que la ligne sera dans tous les cas nettoyée"],
+        correct: ["Il aurai dû se faire aider, pour aller chercher un bac propre et poser la plaque à l’intérieur"]
     }
 ];
 
