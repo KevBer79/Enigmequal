@@ -6,36 +6,21 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- Bloc des consignes -->
-<div class="container" id="consignes-container">
-<h2>Consignes</h2>
+<div id="consignes-container">
+<h2>Bienvenue dans l'escape game Qualité !</h2>
 <p>
-
-            Répondez à chaque question avec attention.<br>
-
-            Vous n'avez qu'un seul essai par question.<br>
-
-            Le chronomètre démarre dès que vous cliquez sur <strong>« Démarrer »</strong>.<br>
-
-            Vous disposez de 15 minutes pour finir.<br><br>
-
-            Bonne chance !
+           Vous allez devoir répondre correctement à toutes les questions pour réussir à vous évader.<br>
+           Soyez attentif, certaines questions peuvent avoir plusieurs bonnes réponses !<br>
+           Vous avez 15 minutes pour terminer. Bonne chance !
 </p>
 <button onclick="demarrerQuestionnaire()">Démarrer</button>
 </div>
-<!-- Bloc du questionnaire (caché au départ) -->
-<div class="container" id="questionnaire" style="display:none;">
-<h2>Questionnaire</h2>
-<p id="question-text"></p>
+<div id="timer" style="display: none;"></div>
+<div id="questionnaire" style="display: none;">
+<div id="question-text"></div>
 <div id="options-container"></div>
-<button id="next-button" style="display:none;">Suivant</button>
+<button id="next-button" style="display: none;">Suivant</button>
 </div>
-<!-- Timer -->
-<div class="timer-container" id="timer" style="display:none;">⏳ Temps restant : 15:00 ⏳</div>
-<!-- Boîte d'erreur en plein écran (générée dynamiquement) -->
-<!-- Pas de contenu ici au départ -->
-<!-- Script principal -->
 <script src="script.js"></script>
 </body>
 </html>
- 
