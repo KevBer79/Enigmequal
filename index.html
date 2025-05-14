@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questionnaire</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
-    <script defer src="script.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Évasion - Questionnaire</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="manifest" href="manifest.json" />
+<script defer src="script.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h2>Questionnaire</h2>
-        <div id="questionnaire">
-            <p id="question-text"></p>
-            <div id="options-container"></div>
-            <button id="next-button" style="display:none;">Suivant</button>
-        </div>
-    </div>
-    <div class="timer-container" id="timer">⏳ Temps restant : 15:00 ⏳</div>
+<div class="container" id="consignes-container">
+<h2>Consignes</h2>
+<p>Répondez à chaque question le plus vite possible. Le temps est limité à 20 minutes.</p>
+<p>Vous pouvez avoir plusieurs bonnes réponses. Lisez bien chaque proposition !</p>
+<button onclick="demarrerQuestionnaire()">Démarrer</button>
+</div>
+<div class="container" id="questionnaire" style="display:none;">
+<h2>QUESTIONNAIRE</h2>
+<p id="question-text"></p>
+<div id="options-container"></div>
+<button id="next-button" style="display:none;" onclick="suivant()">SUIVANT</button>
+</div>
+<div class="timer-container" id="timer" style="display:none;">⏳ Temps restant : 20:00 ⏳</div>
 </body>
 </html>
