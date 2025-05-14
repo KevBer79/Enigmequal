@@ -99,15 +99,21 @@ function startCountdown(durationInMinutes) {
 
 // Message d'erreur
 function afficherMessageErreur(message) {
-    let erreurDiv = document.createElement("div");
-    erreurDiv.className = "erreur-fullscreen";
-    erreurDiv.innerHTML = `
-        <div class="erreur-content">
-            <p>${message}</p>
-            <button onclick="fermerMessageErreur()">RETOUR</button>
-        </div>
-    `;
-    document.body.appendChild(erreurDiv);
+   // Supprimer d'abord toute ancienne boîte d'erreur
+   const ancienneErreur = document.querySelector(".erreur-fullscreen");
+   if (ancienneErreur) {
+       ancienneErreur.remove();
+   }
+   // Créer la nouvelle boîte d'erreur
+   let erreurDiv = document.createElement("div");
+   erreurDiv.className = "erreur-fullscreen";
+   erreurDiv.innerHTML = `
+<div class="erreur-content">
+<p>${message}</p>
+<button onclick="fermerMessageErreur()">RETOUR</button>
+</div>
+   `;
+   document.body.appendChild(erreurDiv);
 }
 
 function fermerMessageErreur() {
