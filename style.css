@@ -44,6 +44,7 @@ button {
     transition: 0.3s;
     margin-top: 15px;
     text-transform: uppercase;
+    align-items: center;
     box-shadow: 2px 2px 10px rgba(0, 69, 255, 0.3);
 }
 
